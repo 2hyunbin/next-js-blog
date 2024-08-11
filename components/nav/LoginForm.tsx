@@ -4,7 +4,6 @@
 import * as React from "react";
 import { IoLogInOutline } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
-import { createBrowserClient } from "@supabase/ssr";
 import { usePathname } from "next/navigation";
 import { createClient } from "@/utils/supabase/client";
 
