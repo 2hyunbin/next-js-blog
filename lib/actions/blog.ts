@@ -31,3 +31,8 @@ export async function readBlog() {
     .select("*")
     .order("created_at", { ascending: true });
 }
+
+export async function deleteBlogById(blogId: string) {
+  const result = await supabase.from("blog").delete().eq("id", blogId);
+  return JSON.stringify(result);
+}
