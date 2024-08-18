@@ -2,9 +2,10 @@
 
 import { createSupabaseServerClient } from "@/utils/supabase/sever.ts";
 import { BlogFormSchemaType } from "@/app/dashboard/schema/index.tsx";
+import { revalidatePath } from "next/cache";
 
 const supabase = createSupabaseServerClient();
-
+const DASHBOARD = "/dashboard";
 export async function createBlog(data: BlogFormSchemaType) {
   const { ["content"]: excludedKey, ...blog } = data;
 
@@ -34,5 +35,12 @@ export async function readBlog() {
 
 export async function deleteBlogById(blogId: string) {
   const result = await supabase.from("blog").delete().eq("id", blogId);
+  revalidatePath(DASHBOARD);
+  return JSON.stringify(result);
+}
+
+export async function updateBlogById(blogId: string, data: BlogFormSchemaType) {
+  const result = await supabase.from("blog").update(data).eq("id", blogId);
+  revalidatePath(DASHBOARD);
   return JSON.stringify(result);
 }

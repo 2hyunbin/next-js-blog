@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import BlogForm from "@/app/dashboard/component/blogForm.tsx";
-import { toast } from "@/components/ui/use-toast.ts";
-import { createBlog } from "@/lib/actions/blog.ts";
-import { BlogFormSchemaType } from "@/app/dashboard/schema/index.tsx";
+import BlogForm from "@/app/dashboard/component/blogForm";
+import { toast } from "@/components/ui/use-toast";
+import { createBlog } from "@/lib/actions/blog";
+import { BlogFormSchemaType } from "@/app/dashboard/schema/index";
 import { useRouter } from "next/navigation";
 
 export default function Page() {
