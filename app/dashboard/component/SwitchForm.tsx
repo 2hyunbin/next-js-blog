@@ -13,7 +13,8 @@ export default function SwitchForm({
   onToggle: () => Promise<String>;
   name: string;
 }) {
-  const onSubmit = () => {
+  const onSubmit = (e) => {
+    e.preventDefault();
     const { error } = JSON.parse(await onToggle());
 
     if (error?.message) {

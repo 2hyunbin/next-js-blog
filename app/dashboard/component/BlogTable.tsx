@@ -6,6 +6,7 @@ import { readBlog, updateBlogById } from "@/lib/actions/blog.ts";
 import DeleteAlert from "@/app/dashboard/component/DeleteAlert.tsx";
 import SwitchForm from "@/app/dashboard/component/SwitchForm.tsx";
 import { BlogFormSchemaType } from "@/app/dashboard/schema/index.tsx";
+import Link from "next/link";
 
 export default async function BlogTable() {
   const { data: blogs } = await readBlog();
@@ -22,11 +23,23 @@ export default async function BlogTable() {
             is_premium: blog.is_premium,
           } as BlogFormSchemaType);
 
+          const updatePublish = updateBlogById.bind(null, blog.id, {
+            is_published: blog.is_published,
+          } as BlogFormSchemaType);
+
           return (
             <div className="grid grid-cols-6 p-5" key={index}>
               <h1 className="col-span-2">{blog.title}</h1>
-              <SwitchForm checked={blog.is_premium} name="premium" />
-              <SwitchForm checked={blog.is_published} name="published" />
+              <SwitchForm
+                checked={blog.is_premium}
+                name="premium"
+                onToggle={updatePremium}
+              />
+              <SwitchForm
+                checked={blog.is_published}
+                name="published"
+                onToggle={updatePublish}
+              />
               <Actions id={blog.id} />
             </div>
           );
@@ -44,10 +57,12 @@ const Actions = ({ id }: { id: string }) => {
         View
       </Button>
       <DeleteAlert blogId={id} />
-      <Button variant="outline" className="flex items-center gap-2">
-        <Pencil1Icon />
-        Edit
-      </Button>
+      <Link href={"/dashboard/blog/edit/" + id}>
+        <Button variant="outline" className="flex items-center gap-2">
+          <Pencil1Icon />
+          Edit
+        </Button>
+      </Link>
     </div>
   );
 };
