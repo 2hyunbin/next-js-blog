@@ -21,7 +21,7 @@ import { Button } from "@/components/ui/button.tsx";
 export default function DeleteAlert({ blogId }: { blogId: string }) {
   const [isPending, startTransition] = useTransition();
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
 
     startTransition(async () => {

@@ -25,12 +25,15 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Textarea } from "@/components/ui/textarea";
 import MarkDownPreview from "@/components/markdown/MarkDownPreview";
-import { BlogFormSchema } from "@/app/dashboard/schema/index.tsx";
+import {
+  BlogFormSchema,
+  BlogFormSchemaType,
+} from "@/app/dashboard/schema/index.tsx";
 
 export default function BlogForm({
   onHandleSubmit,
 }: {
-  onHandleSubmit: (data: BlogFormSchema) => void;
+  onHandleSubmit: (data: BlogFormSchemaType) => void;
 }) {
   const [isPreview, setPreview] = useState(false);
   const [isPending, startTransition] = useTransition();

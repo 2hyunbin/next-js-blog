@@ -10,10 +10,10 @@ export default function SwitchForm({
   name,
 }: {
   checked: boolean;
-  onToggle: () => Promise<String>;
+  onToggle: () => Promise<string>;
   name: string;
 }) {
-  const onSubmit = (e) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     const { error } = JSON.parse(await onToggle());
 
